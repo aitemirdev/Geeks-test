@@ -1,62 +1,70 @@
+ // 1
 
-//  1
-const containsOnlyDigits = (str) => {
-    const regExp = /^\d+$/;
-    return regExp.test(str);
+function extractNumbers(str) {
+    const regex = /\d+/g;
+    const numbersInString = str.match(regex)
+    return numbersInString
 }
 
-console.log(containsOnlyDigits("12345"));
-console.log(containsOnlyDigits("12a45"));
+console.log(extractNumbers("a1fg5hj6"))
 
-// 2
+ // 2
 
-function printSecond() {
-    let count = 0;
-    setInterval(() => {
-        count++;
-        console.log(`Прошла секунда ${count}`);
-    }, 1000);
-}
+ function fibonacci(n, a = 0, b = 1) {
+     if (n === 0) {
+         return;
+     }
 
-printSecond();
+     if (b <= 144) {
+         setTimeout(() => {
+             console.log(b);
+             fibonacci(n - 1, b, a + b);
+         }, 1000);
+     } else {
+         return;
+     }
+ }
+
+ fibonacci(20);
 
 // 3
 
-const count = () => {
-    let i = 1;
-    const interval = setInterval(() => {
-        console.log(i);
-        i++;
-        if (i > 10) {
-            clearInterval(interval);
-        }
-    }, 1000);
-}
+  const infoTitle = async () =>  {
+     try {
+         const response = await fetch("https://fakestoreapi.com/products");
+         const data = await response.json();
+         const titles = data.map((product) => product.title);
+         console.log(titles);
+     } catch (error) {
+         console.error(error);
+     }
+ }
 
-count();
+ infoTitle();
 
 // 4
 
-const block = document.querySelector('.block');
+ const buttonContainer = document.getElementById("button-container");
 
-block.addEventListener('click', () => {
-  if (block.classList.contains('bg-color')) {
-    block.classList.remove('bg-color');
-  } else {
-    block.classList.add('bg-color');
-  }
-});
+ buttonContainer.addEventListener("click", function(event) {
+     const clickedButton = event.target;
+     document.body.style.backgroundColor = clickedButton.id;
+ });
+//6
+ let counter = 0;
+ const counterElem = document.getElementById('counter');
 
-// 5
+ function incrementCounter() {
+     counter += 1;
+     counterElem.innerText = counter;
+     if (counter === 100) {
+         clearInterval(intervalId);
+     }
+ }
 
-let xhr = new XMLHttpRequest();
-xhr.open('GET', 'data.json');
-xhr.onload = function() {
-    if (xhr.status === 200) {
-        let json = JSON.parse(xhr.responseText);
-        console.log(json);
-    } else {
-        console.log('Ошибка ' + xhr.status);
-    }
-};
-xhr.send();
+ const intervalId = setInterval(incrementCounter, 1); // Run the function every millisecond
+
+
+
+
+
